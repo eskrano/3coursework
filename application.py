@@ -63,11 +63,30 @@ def Stats(event):
 	cur.execute("SELECT `id` FROM result WHERE second = ?",('988',))
 	s_q_t_a = len(cur.fetchall())
 
-	#third 
+	#third
+	cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Очень плохо',))
+	t_q_f_a = len(cur.fetchall());
+	cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Хорошо',))
+	t_q_s_a = len(cur.fetchall())
 	
+	
+	#four
+	
+	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Beginner',))
+	f_q_f_a = len(cur.fetchall())
+	
+	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Intermediatle',))
+	f_q_s_a = len(cur.fetchall())
+	
+	#five 
+	
+	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Хорошо',))
+	five_f_a = len(cur.fetchall())
+	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Плохо',))
+	five_s_a = len(cur.fetchall())
 
 
-	print(f_q_f_a)
+
 	
 	statwindow.mainloop()
 

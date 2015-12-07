@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 from tkinter import *
 import sqlite3
 
@@ -21,7 +21,7 @@ cur.executescript("""
 			seven text
 			);
 
-	
+
 
 	""")
 db.commit()
@@ -48,14 +48,14 @@ def Stats(event):
 
 	#first question ansvers counter
 	cur.execute("SELECT `id` FROM result WHERE one = ?",('Мужской',))
-	f_q_f_a = len(cur.fetchall())
+	f1_q_f_a = len(cur.fetchall())
 	cur.execute("SELECT `id` FROM result WHERE one = ?",('Женский',))
-	f_q_s_a = len(cur.fetchall())
+	f1_q_s_a = len(cur.fetchall())
 	cur.execute("SELECT `id` FROM result WHERE one = ?",('Не знаю',))
-	f_q_t_a = len(cur.fetchall())
-	print(f_q_f_a)
+	f1_q_t_a = len(cur.fetchall())
+
 	#second question ansvers counter
-	
+
 	cur.execute("SELECT `id` FROM result WHERE second = ?",('1945',))
 	s_q_f_a = len(cur.fetchall())
 	cur.execute("SELECT `id` FROM result WHERE second = ?",('1991',))
@@ -68,26 +68,51 @@ def Stats(event):
 	t_q_f_a = len(cur.fetchall());
 	cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Хорошо',))
 	t_q_s_a = len(cur.fetchall())
-	
-	
+
+
 	#four
-	
+
 	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Beginner',))
 	f_q_f_a = len(cur.fetchall())
-	
+
 	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Intermediatle',))
 	f_q_s_a = len(cur.fetchall())
-	
-	#five 
-	
+
+	#five
+
 	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Хорошо',))
 	five_f_a = len(cur.fetchall())
 	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Плохо',))
 	five_s_a = len(cur.fetchall())
 
 
+	##labels
 
-	
+	Label(statwindow,text = "1й вопрос").grid(row = 1, column = 1)
+
+	#result_1
+	Label(statwindow,text = "Мужской: ").grid(row = 2, column = 1)
+	Label(statwindow,text = f1_q_f_a).grid(row = 2,column = 2)
+
+	Label(statwindow,text = "Женский: ").grid(row = 3, column = 1)
+	Label(statwindow,text = f1_q_s_a).grid(row = 3,column = 2)
+
+	Label(statwindow,text = "Не знаю: ").grid(row = 4, column = 1)
+	Label(statwindow,text = f1_q_t_a).grid(row = 4,column = 2)
+
+	#result_2
+
+	Label(statwindow,text = "2й вопрос").grid(row = 5,column = 1)
+
+	Label(statwindow,text = "1945: ").grid(row = 6, column = 1)
+	Label(statwindow,text = s_q_f_a).grid(row = 6,column = 2)
+
+	Label(statwindow,text = "1991: ").grid(row = 7, column = 1)
+	Label(statwindow,text = s_q_s_a).grid(row = 7,column = 2)
+
+	Label(statwindow,text = "988: ").grid(row =8, column = 1)
+	Label(statwindow,text = s_q_t_a).grid(row = 8,column = 2)
+
 	statwindow.mainloop()
 
 root = Tk()

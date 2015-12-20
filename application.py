@@ -26,6 +26,8 @@ cur.executescript("""
 	""")
 db.commit()
 
+admin_password = 123456
+
 "FUNCTIONS"
 
 
@@ -41,79 +43,119 @@ def Save(event):
 	cur.execute("INSERT INTO result (one,second,third,four,five) VALUES (?,?,?,?,?)",(first_value,second,third,four,five,))
 	db.commit()
 def Stats(event):
-	statwindow = Tk()
-	statwindow.title(u'Статистика')
-	statwindow.geometry('500x400+200+100')
+	
+	if (admin_root_password_entry.get() == admin_password):
+
+		Label(root,text = 'Пароль введен верно!').grid(row =  20, column =1 )
+
+		statwindow = Tk()
+		statwindow.title(u'Статистика')
+		statwindow.geometry('500x400+200+100')
 
 
-	#first question ansvers counter
-	cur.execute("SELECT `id` FROM result WHERE one = ?",('Мужской',))
-	f1_q_f_a = len(cur.fetchall())
-	cur.execute("SELECT `id` FROM result WHERE one = ?",('Женский',))
-	f1_q_s_a = len(cur.fetchall())
-	cur.execute("SELECT `id` FROM result WHERE one = ?",('Не знаю',))
-	f1_q_t_a = len(cur.fetchall())
+		#first question ansvers counter
+		cur.execute("SELECT `id` FROM result WHERE one = ?",('Мужской',))
+		f1_q_f_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM result WHERE one = ?",('Женский',))
+		f1_q_s_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM result WHERE one = ?",('Не знаю',))
+		f1_q_t_a = len(cur.fetchall())
 
-	#second question ansvers counter
+		#second question ansvers counter
 
-	cur.execute("SELECT `id` FROM result WHERE second = ?",('1945',))
-	s_q_f_a = len(cur.fetchall())
-	cur.execute("SELECT `id` FROM result WHERE second = ?",('1991',))
-	s_q_s_a = len(cur.fetchall())
-	cur.execute("SELECT `id` FROM result WHERE second = ?",('988',))
-	s_q_t_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM result WHERE second = ?",('1945',))
+		s_q_f_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM result WHERE second = ?",('1991',))
+		s_q_s_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM result WHERE second = ?",('988',))
+		s_q_t_a = len(cur.fetchall())
 
-	#third
-	cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Очень плохо',))
-	t_q_f_a = len(cur.fetchall());
-	cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Хорошо',))
-	t_q_s_a = len(cur.fetchall())
-
-
-	#four
-
-	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Beginner',))
-	f_q_f_a = len(cur.fetchall())
-
-	cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Intermediatle',))
-	f_q_s_a = len(cur.fetchall())
-
-	#five
-
-	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Хорошо',))
-	five_f_a = len(cur.fetchall())
-	cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Плохо',))
-	five_s_a = len(cur.fetchall())
+		#third
+		cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Очень плохо',))
+		t_q_f_a = len(cur.fetchall());
+		cur.execute("SELECT `id` FROM `result` WHERE `third` = ?",('Хорошо',))
+		t_q_s_a = len(cur.fetchall())
 
 
-	##labels
+		#four
 
-	Label(statwindow,text = "1й вопрос").grid(row = 1, column = 1)
+		cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Хорошо',))
+		f_q_f_a = len(cur.fetchall())
 
-	#result_1
-	Label(statwindow,text = "Мужской: ").grid(row = 2, column = 1)
-	Label(statwindow,text = f1_q_f_a).grid(row = 2,column = 2)
+		cur.execute("SELECT `id` FROM `result` WHERE `four` = ?",('Плохо',))
+		f_q_s_a = len(cur.fetchall())
 
-	Label(statwindow,text = "Женский: ").grid(row = 3, column = 1)
-	Label(statwindow,text = f1_q_s_a).grid(row = 3,column = 2)
+		#five
 
-	Label(statwindow,text = "Не знаю: ").grid(row = 4, column = 1)
-	Label(statwindow,text = f1_q_t_a).grid(row = 4,column = 2)
+		cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Хорошо',))
+		five_f_a = len(cur.fetchall())
+		cur.execute("SELECT `id` FROM `result` WHERE `five` = ? ",('Плохо',))
+		five_s_a = len(cur.fetchall())
 
-	#result_2
 
-	Label(statwindow,text = "2й вопрос").grid(row = 5,column = 1)
+		##labels
 
-	Label(statwindow,text = "1945: ").grid(row = 6, column = 1)
-	Label(statwindow,text = s_q_f_a).grid(row = 6,column = 2)
+		Label(statwindow,text = "1й вопрос").grid(row = 1, column = 1)
 
-	Label(statwindow,text = "1991: ").grid(row = 7, column = 1)
-	Label(statwindow,text = s_q_s_a).grid(row = 7,column = 2)
+		#result_1
+		Label(statwindow,text = "Мужской: ").grid(row = 2, column = 1)
+		Label(statwindow,text = f1_q_f_a).grid(row = 2,column = 2)
 
-	Label(statwindow,text = "988: ").grid(row =8, column = 1)
-	Label(statwindow,text = s_q_t_a).grid(row = 8,column = 2)
+		Label(statwindow,text = "Женский: ").grid(row = 3, column = 1)
+		Label(statwindow,text = f1_q_s_a).grid(row = 3,column = 2)
 
-	statwindow.mainloop()
+		Label(statwindow,text = "Не знаю: ").grid(row = 4, column = 1)
+		Label(statwindow,text = f1_q_t_a).grid(row = 4,column = 2)
+
+		#result_2
+
+		Label(statwindow,text = "2й вопрос").grid(row = 5,column = 1)
+
+		Label(statwindow,text = "1945: ").grid(row = 6, column = 1)
+		Label(statwindow,text = s_q_f_a).grid(row = 6,column = 2)
+
+		Label(statwindow,text = "1991: ").grid(row = 7, column = 1)
+		Label(statwindow,text = s_q_s_a).grid(row = 7,column = 2)
+
+		Label(statwindow,text = "988: ").grid(row =8, column = 1)
+		Label(statwindow,text = s_q_t_a).grid(row = 8,column = 2)
+
+		#result_3
+		
+		Label(statwindow,text = '3й вопрос').grid(row = 9, column = 1)
+
+		Label(statwindow, text = 'Очень плохо').grid(row = 10, column = 1)
+		Label(statwindow, text = t_q_f_a).grid(row = 10 , column = 2)
+
+		Label(statwindow, text = 'Хорошо').grid(row = 11, column = 1)
+		Label(statwindow, text = t_q_s_a).grid(row = 11, column = 2)
+
+		#result 4
+		
+
+		Label(statwindow,text = '4й вопрос').grid(row = 12, column = 1)
+		
+		Label(statwindow, text = 'Хорошо').grid(row = 13, column =  1)
+		Label(statwindow, text = f_q_f_a).grid(row = 13 , column = 2)
+
+		Label(statwindow, text = 'Плохо').grid(row = 14 , column =1)
+		Label(statwindow, text = f_q_s_a).grid( row = 14 , column = 2)
+
+		#result 5 
+		
+		Label(statwindow,text = '5й вопрос').grid(row = 15, column = 1)
+
+		Label(statwindow, text = 'Хорошо').grid(row = 16 , column = 1)
+		Label(statwindow, text = five_f_a).grid(row = 16, column = 2)
+
+		Label(statwindow, text = 'Плохо').grid(row = 17, column = 1)
+		Label(statwindow, text = five_s_a).grid(row = 17, column = 2 )
+
+
+		statwindow.mainloop()
+
+	else:
+		Label(root,text = 'Не верный пароль').grid(row =  20, column =1 )
 
 root = Tk()
 
@@ -123,8 +165,7 @@ root = Tk()
 
 root.title(u'QUESTION app')
 root.geometry('500x400+300+200') # ширина=500, высота=400, x=300, y=200
-root.resizable(True, False) # размер окна может быть изменен только по горизонтали
-
+root.resizable(False, False) #denny size change
 #first question
 Label(root,text = "Ваш пол").grid(row = 1, column = 1)
 var=StringVar()
@@ -162,8 +203,8 @@ rbutton8.grid(row  = 6,column = 2)
 Label(root,text = "Как вы оцениваете свои знания английского?").grid(row = 7, column = 1)
 var_fourth=StringVar()
 var_fourth.set(0)
-rbutton9=Radiobutton(root,text='Beginner',variable=var_fourth,value="Beginner")
-rbutton10=Radiobutton(root,text='Intermediatle',variable=var_fourth,value="Intermediatle")
+rbutton9=Radiobutton(root,text='Хорошо',variable=var_fourth,value="Хорошо")
+rbutton10=Radiobutton(root,text='Плохо',variable=var_fourth,value="Плохо")
 rbutton9.grid(row  = 8,column = 1)
 rbutton10.grid(row  = 8,column = 2)
 
@@ -182,15 +223,14 @@ rbutton12.grid(row  = 10,column = 2)
 
 SaveButton = Button(root,text = 'Сохранить')
 SaveButton.bind("<Button-1>",Save)
-SaveButton.grid(row = 11, column =0)
-
-
-StatWindowOpen =  Button(root,text = 'Stats')
-StatWindowOpen.bind("<Button-1>",Stats)
-StatWindowOpen.grid(row = 11, column =1)
+SaveButton.grid(row = 11, column =1)
 
 
 
-
-
+admin_root_password_entry = IntVar()
+Label(root,text = 'Введите пароль для входа в админ меню').grid(row = 17, column = 1)
+Entry(root,textvariable = admin_root_password_entry).grid(row = 18, column  = 1)
+SaveButton = Button(root,text = 'Войти')
+SaveButton.bind("<Button-1>",Stats)
+SaveButton.grid(row = 19, column =1)
 root.mainloop()
